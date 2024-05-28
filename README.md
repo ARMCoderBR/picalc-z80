@@ -6,7 +6,7 @@
 |_|  |___\____/_/   \_\_____\____|   /____\___/ \___/ 
 ```                                                       
 
-![Banner](https://repository-images.githubusercontent.com/806794224/a57ff458-def5-4402-adb6-e9e559a83d13)
+![Banner](https://repository-images.githubusercontent.com/806794224/33ef9e2e-9f8a-400b-9a47-7b4fd8e0ea4f)
 
 ## Project
 
