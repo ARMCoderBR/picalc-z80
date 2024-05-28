@@ -1,6 +1,6 @@
 ;//////////////////////////////////////////////////////////////////////////////;
 ; Project:                                                                     ;
-;    Z80-PICALC                                                                ;
+;    PICALC-Z80                                                                ;
 ;                                                                              ;
 ; Description:                                                                 ;
 ;    A calculator that yields an arbitrary number of digits of the number PI.  ;
@@ -75,7 +75,7 @@ RAMBASE:        equ 8192
 RAMSZ:          equ 8192
 
 ; Algorithm constants
-NUM_DECS:       equ 1000
+NUM_DECS:       equ 100
 NUM_IT:         equ ((NUM_DECS*9)/10)
 NBITS_FR:       equ (3*NUM_DECS + (NUM_DECS >> 1))
 NBITS_INT:      equ 16
@@ -1583,6 +1583,12 @@ print_int_part:
     ret
 
 ;///////////////////////////////////////////////////////////////////////////////
+;   print_bc
+;   Internal function for debugging
+;   Parameters:
+;     BC: value to print
+;   Returns: Nothing
+;   Affects: BC DE HL AF
 print_bc:
 
     ld l,c
