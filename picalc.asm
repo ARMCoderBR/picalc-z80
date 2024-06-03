@@ -60,7 +60,7 @@
 ;                                                                              ;
 ; Funny note:                                                                  ;
 ;    This project implements the Bailey-Borwein-Plouffe method of calculating  ;
-;    PI. This method is much, much faster that the classic Euler series.       ;
+;    PI. This method is much, much faster that the classic Leibniz series.     ;
 ;    The funny thing is that the method was discovered (invented?) in 1995,    ;
 ;    when the Z80 had already passed its heyday and was fading into a niche,   ;
 ;    retro platform.                                                           ;
@@ -108,9 +108,13 @@ NBYTES1:        equ NBYTES-1
 ;///////////////////////////////////////////////////////////////////////////////
 ;   prints
 ;   void prints(const char *string);
-;   Parameters: HL: string
+;   Parameters: The string must be supplied inline after the call to prints,
+;               and must be null-terminated. The function will return to the
+;               first instruction after the aforementioned null terminator.
+;               Because of that, the call must be always unconditional (opcode
+;               0xCD).
 ;   Returns: Nothing
-;   Affects: HL
+;   Affects: HL, AF & whatever INT 08H also affects
 prints:
 
     pop hl
@@ -915,7 +919,7 @@ mul_reg2_by_reg1_2:
     ld e,(ix+4)
     ld d,(ix+5)         ; IX+4, IX+5: regmdiv
     ld b,iyh
-    ld c,iyl            ; BC recebe IY = 'places'
+    ld c,iyl            ; BC gets IY = 'places'
     call shl_reg
 
 ;                add_reg2_to_reg1(reg2, regmdiv);
@@ -1089,7 +1093,7 @@ mul_reg_10:
 
 ;    uint8_t regmdiv[NBYTES];
     ld c,ixl
-    ld b,ixh            ; Copia IX em BC
+    ld b,ixh            ; Copy IX -> BC
     ld HL,8
     add hl,bc
     ld (ix+4),l
@@ -1135,8 +1139,8 @@ mul_reg_10:
 ;     HL: reg1
 ;     DE: reg2
 ;   Returns: Flags: Z:        reg1 = reg2
-;                   NZ e C:   reg1 < reg2
-;                   NC e NC:  reg1 > reg2
+;                   NZ & C:   reg1 < reg2
+;                   NC & NC:  reg1 > reg2
 ;   Affects: BC DE HL AF
 compare:
 
@@ -1809,7 +1813,7 @@ test_pi_bbp_1a:
     ld h,(ix+5)         ; IX+4, IX+5: regden
     push hl
     call zero_reg
-    pop de              ; DE contém regden
+    pop de              ; DE has regden
 
 ;        load_reg_int(regden,8*k+1);     // Sets 8k+1
     ld l,(ix+6)

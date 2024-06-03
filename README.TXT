@@ -101,8 +101,9 @@ Funny note
 ~~~~~~~~~~
 
 This project implements the *Bailey-Borwein-Plouffe* method of calculating
-PI. This method is much, much faster that the classic Euler series.
+PI. This method is much, much faster that the classic Leibniz series.
 The funny thing is that the method was discovered (invented?) in 1995,
 when the Z80 had already passed its heyday and was fading into a niche,
 retro platform.
+
 
